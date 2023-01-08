@@ -47,7 +47,10 @@ header{
     height: auto;
 }
 .highlight{
-    fill: aquamarine;
+    fill: darkgray;
+}
+.picked{
+    fill: orange ;
 }
 .userBox{
     grid-area: 2 / 3;
@@ -61,4 +64,5 @@ header{
     background-color: white;
     border: 1px solid black;
     padding: 10px;
+    display: none;
   }
