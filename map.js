@@ -4,8 +4,6 @@ $(document).ready(function() {
     let parsed = localStorage.getItem('data');
     var selectedCountries = JSON.parse(parsed);
 
-    
-
     let userExists = selectedCountries.hasOwnProperty(activeUser);
     if (!userExists) {
         selectedCountries[activeUser] = { visitedCountries: [] }
@@ -52,7 +50,7 @@ $(document).ready(function() {
         });
       });
 
-    $('#logout').on('click',function(){
+    $('#logout').on('click',function(){   
         var appData = JSON.stringify(selectedCountries);
         localStorage.setItem('data',appData);
         localStorage.removeItem('user');

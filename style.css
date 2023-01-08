@@ -27,10 +27,11 @@ header{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    grid-area: 2 / 2;
+    grid-area: 3 / 2;
     
     background-color: rgb(244, 178, 55);
     border-radius: 30px;
+    margin:100px;
 }
 .inner_container{
     display: grid;
