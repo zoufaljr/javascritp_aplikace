@@ -5,10 +5,11 @@ body {
 
 .container{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 500px 0.5fr;
+    grid-template-rows: 100px 500px 50px;
     height: 100vh;
     width: 100vw;
+    
 }
 
 header{
@@ -27,4 +28,21 @@ header{
     gap: 20px;
     background-color: rgb(244, 178, 55);
     border-radius: 30px;
+}
+.inner_container{
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    justify-items: center;
+    align-items: center;
+}
+
+#world-map{
+    width: auto;
+    height: auto;
+}
+.highlight{
+    fill: aquamarine;
 }
