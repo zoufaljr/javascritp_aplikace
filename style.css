@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-area: 1 / 2;
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-area: 2 / 2;
+    gap: 20px;
+    background-color: rgb(244, 178, 55);
+    border-radius: 30px;
+}
