@@ -4,12 +4,15 @@ $(document).ready(function() {
     let parsed = localStorage.getItem('data');
     var selectedCountries = JSON.parse(parsed);
 
+    if (selectedCountries == null) {
+        selectedCountries = {};
+      }
     let userExists = selectedCountries.hasOwnProperty(activeUser);
     if (!userExists) {
         selectedCountries[activeUser] = { visitedCountries: [] }
     } 
      
-    $.get('/mapping.csv', function(data) {
+    $.get('mapping.csv', function(data) {
         countriesList = $.csv.toObjects(data);
         $('#count').html(selectedCountries[activeUser]['visitedCountries'].length);
         selectedCountries[activeUser]['visitedCountries'].forEach(function(country) {
@@ -28,6 +31,7 @@ $(document).ready(function() {
         if(class_name != undefined){
             $('#'+ class_name).addClass('picked');
             addToList(class_name);
+            save();
         }
     });
 
@@ -55,12 +59,15 @@ $(document).ready(function() {
       });
 
     $('#logout').on('click',function(){   
-        var appData = JSON.stringify(selectedCountries);
-        localStorage.setItem('data',appData);
+        save();
         localStorage.removeItem('user');
         window.location.href = 'index.html';
     });
 
+    function save(){
+        var appData = JSON.stringify(selectedCountries);
+        localStorage.setItem('data',appData);
+    }
 
 
     function getCountryName(code) {
@@ -99,4 +106,3 @@ $(document).ready(function() {
         $("#countries_list li").filter(":contains(" + getCountryName(id) + ")").remove();
       }
 });
-
