@@ -7,7 +7,7 @@ $(document).ready(function() {
             return;
         }
         account = loginUsernameEntry;
-        localStorage.setItem('user',loginUsernameEntry);
+        localStorage.setItem('mapperuser',loginUsernameEntry);
         window.location.href = 'map.html';
     });
 });
