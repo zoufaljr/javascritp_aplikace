@@ -37,10 +37,13 @@ header{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    justify-self: center;
+    align-self: center;
     grid-area: 3 / 2;
     background-color: rgb(244, 178, 55);
     border-radius: 30px;
-    margin:75px 100px 100px 75px;
+    height: 300px;
+    width: 400px;
 }
 
 .inner_container{
@@ -86,18 +89,34 @@ header{
     flex-direction: column;
     align-items: center;
     grid-area: 3 / 1;
-    background-color: grey;
     margin: 40px;
     padding: 15px;
     border-radius: 30px;
-    
 }
+#userStats ul{
+    padding: 0;
+}
+
+#userStats li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    min-width: 100px;
+    list-style-type: none;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    font-size: larger;
+}
+
+
 #leaderboard{
     display: flex;
     flex-direction: column;
     align-items: center;
     grid-area: 3 / 3;
-    background-color: grey;
     margin: 40px;
     padding: 15px;
     border-radius: 30px;
@@ -107,15 +126,22 @@ header{
     padding: 0;
 }
 #leaderboard li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 80px;
     list-style-type: none;
     background-color: white;
-    margin: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 }
-
-
-#count{
+#leaderboard span{
     font-size: larger;
 }
+
 
 #uname{
     padding: 10px 8px;
@@ -123,7 +149,7 @@ header{
     font-size: 16px;
     background: white;
     border: none;
-    color: #c7c7c7;
+    color: #696868;
     border-radius: 4px;
     outline: none;
 }
