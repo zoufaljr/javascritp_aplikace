@@ -1,7 +1,6 @@
 $(document).ready(function() {
     var activeUser = localStorage.getItem('mapperuser');
     var countriesList;
-    //let parsed = localStorage.getItem('data');
     var selectedCountries = JSON.parse(localStorage.getItem('mapperdata'));
     var leaderboard ={};
 
@@ -13,6 +12,12 @@ $(document).ready(function() {
         selectedCountries[activeUser] = { visitedCountries: [] }
     } 
 
+    /**
+     * Ajax method for loading CSV, which is later used to display name
+     * of country over which is user hovering.
+     * Highlightning countries already picked by user whe application is loaded.
+     * Sorting leaderboard of other users and than populating it.
+     */
     $.get('data/mapping.csv', function(data) {
         countriesList = $.csv.toObjects(data);
         $('#count').html(selectedCountries[activeUser]['visitedCountries'].length);
@@ -27,9 +32,16 @@ $(document).ready(function() {
         });
         populateLeaderboard();
       });
-
+      /**
+       * Setting logged in user in top right corner.
+       */
     $('#activeUser').html(activeUser);
     
+    /**
+     * When user clicks on country, which is defined by group <g> or <path> and 
+     * corresponding ID, the element is than assigned class which highlightes the country,
+     * the country is added to his list of picked of countries and all data are saved.
+     */
     $('g,path').click(function() {
         var class_name =  $(this).attr('id');
         if(class_name != undefined){
@@ -39,6 +51,11 @@ $(document).ready(function() {
         }
     });
 
+    /**
+     * When user hovers over country, which is defined by group <g> or <path> and 
+     * corresponding ID, small box witch country full name is displayed next to users arrow.
+     * And countries SVG slightly changes color.
+     */
     $('g,path').mouseenter(function() {
         var class_name =  $(this).attr('id');
         if(class_name != undefined){
@@ -47,7 +64,11 @@ $(document).ready(function() {
             $('#mouseBox').html(getCountryName(class_name));
         }
       });
-    
+
+    /**
+     * When users stops hovering over country, which is defined by by group <g> or <path> and 
+     * corresponding ID, small box and highlightning are removed.
+     */
     $('g,path').mouseleave(function() {
         var class_name =  $(this).attr('id');
         if(class_name != undefined){
@@ -55,6 +76,9 @@ $(document).ready(function() {
             $('#mouseBox').hide();
         }
     });
+    /**
+     * This functions changes #mouseBox absolute position, so it follows users arrow.
+     */
 
     $(document).mousemove(function(event) {
         $('#mouseBox').css({
@@ -63,12 +87,21 @@ $(document).ready(function() {
         });
       });
 
+    /**
+     * When user logs out from application, all content is saved.
+     * userneme is removed from localstorage and
+     * user is redirected to login page.
+     */
     $('#logout').on('click',function(){   
         save();
         localStorage.removeItem('mapperuser');
         window.location.href = 'index.html';
     });
 
+    /**
+     * Function which handles saving data and during saving
+     * sorts leaderboard and populates it.
+     */
     function save(){
         var appData = JSON.stringify(selectedCountries);
         localStorage.setItem('mapperdata',appData);
@@ -81,7 +114,9 @@ $(document).ready(function() {
         populateLeaderboard();
     }
 
-
+    /**
+     * Function which return country full name by given code of country.
+     */
     function getCountryName(code) {
       if(countriesList != undefined){
         var country = countriesList.find(function(arr) {
@@ -94,6 +129,10 @@ $(document).ready(function() {
         return country.Country_Name;
     }
     
+    /**
+     * Function adds new country to user's array of countries, if user already has this country, 
+     * it is removed and highlightning class is also removed.
+     */
       function addToList(id) {
         if (selectedCountries == null) {
           selectedCountries = {};
@@ -112,17 +151,10 @@ $(document).ready(function() {
         $('#count').html(selectedCountries[activeUser]['visitedCountries'].length);
       }
 
-     /*function appendSelectedCountries(id) {
-        var ul = document.getElementById("countries_list");
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(getCountryName(id)));
-        ul.appendChild(li);
-      }
-
-      function removeSelectedCountries(id){
-        $("#countries_list li").filter(":contains(" + getCountryName(id) + ")").remove();
-      }*/
-
+      /**
+       * Function which populates leaderboard with top 4 user by picked countries,
+       * if there is less users is app, then the fewer users is displayed.
+       */
       function populateLeaderboard(){
         var ol = $("#users");
         ol.empty();
@@ -135,7 +167,6 @@ $(document).ready(function() {
         }
         
         for(let i = 0; i < n ; i++){
-            console.log(leaderboard[keys[i]]);
             let li1 = $("<li>");
             let name = $("<name>").text(leaderboard[keys[i]].name);
             li1.append(name);
